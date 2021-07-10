@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>spa oefening1</title>
+    <script src="../jquery.js" charset="utf-8"></script>
+  </head>
+  <body>
+    <div id="hierinfo">
+
+    </div>
+    <script type="text/javascript">
+      $(document).ready(function () {
+        // $.ajax({
+        //   url: "index.php",
+        //   dataType: "json"
+        // })
+        $.getJSON("index.php")
+        .done(function (data) {
+          var output = "<p>";
+
+          for (var i in data)
+          {
+            output += data[i] + " heeft nummer " + i + "<br>";
+          }
+
+          output += "</p>";
+          $('#hierinfo').html(output);
+        })
+        .fail(function () {
+          $('#hierinfo').text("AJAX request is mislukt!");
+        })
+        .always(function () {
+          alert("AJAX request is klaar!");
+        });
+      });
+    </script>
+  </body>
+</html>

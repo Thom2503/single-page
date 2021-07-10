@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>spa oefening4</title>
+    <script src="../jquery.js" charset="utf-8"></script>
+  </head>
+  <body>
+    <input type="text" name="invoer" id="invoer" value="invoer"><br>
+    <input type="submit" name="knop" id="knop" value="">
+    <div id="resultaat">
+
+    </div>
+    <script type="text/javascript">
+      $(document).ready(function () {
+        $("#knop").click(function () {
+          var invoer = $("#invoer").val();
+
+          $.ajax({
+            url: "oefening5.php",
+            method: "POST",
+            data: {
+              'invoer': invoer
+            }
+          })
+          .done(function (data) {
+            if (data == "OK") {
+              $("#resultaat").text("Gelukt");
+            } else {
+              $("#resultaat").text("Er is iets fout gegaan");
+            }
+          })
+          .fail(function () {
+            $('#resultaat').text("AJAX request is mislukt!");
+          })
+          .always(function () {
+            console.log("AJAX request is klaar!");
+          });
+        });
+      });
+    </script>
+  </body>
+</html>
